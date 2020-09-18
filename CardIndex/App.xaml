@@ -1,0 +1,28 @@
+﻿<Application x:Class="CardIndex.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <Style x:Key="TextErrorStyle1" TargetType="{x:Type TextBox}">
+
+        </Style>
+        <Style x:Key="TextErrorStyle" TargetType="TextBox" >
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate x:Name="TextErrorTemplate">
+                        <DockPanel>
+                            <Border BorderBrush="Red" BorderThickness="2">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock FontSize="20" Foreground="Red">*?*</TextBlock>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Application.Resources>
+</Application>

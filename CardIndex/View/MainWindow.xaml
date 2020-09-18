@@ -1,0 +1,50 @@
+﻿<Window x:Class="CardIndex.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:viewModel="clr-namespace:CardIndex.ViewModel"
+        xmlns:controls="clr-namespace:CardIndex.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Просмотр карт пациентов" Command="{Binding OpenFillCard}" CommandParameter="{Binding ElementName=LayoutDocumentPane, Path=Parent}"></MenuItem>
+            <MenuItem Header="Просмотр карт посещений" Command="{Binding OpenFillVisit}" CommandParameter="{Binding ElementName=LayoutDocumentPane, Path=Parent}"></MenuItem>
+
+        </Menu>
+
+        <xcad:DockingManager
+			x:Name="DockManager"
+			Grid.Row="2"
+			AllowMixedOrientation="False">
+            <xcad:DockingManager.Theme>
+                <xcad:VS2010Theme />
+            </xcad:DockingManager.Theme>
+            <xcad:DockingManager.DocumentHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,4,0" Source="{Binding IconSource}" />
+                        <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                </DataTemplate>
+            </xcad:DockingManager.DocumentHeaderTemplate>
+            <xcad:LayoutRoot>
+                <xcad:LayoutPanel Orientation="Horizontal">
+                    <xcad:LayoutDocumentPaneGroup>
+                        <xcad:LayoutDocumentPane x:Name="LayoutDocumentPane">
+                        </xcad:LayoutDocumentPane>
+                    </xcad:LayoutDocumentPaneGroup>
+
+                </xcad:LayoutPanel>
+            </xcad:LayoutRoot>
+        </xcad:DockingManager>
+    </Grid>
+</Window>

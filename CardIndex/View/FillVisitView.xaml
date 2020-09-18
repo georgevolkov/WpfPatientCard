@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="CardIndex.View.FillVisitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:CardIndex.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
+             Background="Azure">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0" ItemsSource="{Binding PatientCards}" SelectedItem="{Binding PatientCardVisitSelectedItem, Mode=TwoWay}" SelectionMode="Single" SelectionUnit="FullRow" SelectedIndex="0" IsReadOnly="True" AutoGenerateColumns="False" IsSelected="True">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Background" Value="CornflowerBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ф.И.О" Width="*" Binding="{Binding Path=Fio}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DataGrid Grid.Row="0" ItemsSource="{Binding Visits}" SelectionMode="Single" SelectionUnit="FullRow" SelectedIndex="0" IsReadOnly="True" AutoGenerateColumns="False"
+                      SelectedItem="{Binding VisitCardSelectedItem, Mode=OneWayToSource}" IsSelected="True">
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="CornflowerBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Тип посещения" Width="*" Binding="{Binding Path=VisitType}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата посещения" Width="*" Binding="{Binding Path=VisitDate}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Диагноз" Width="*" Binding="{Binding Path=Diagnosis}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Button Content="Добавить" Command="{Binding AddVisitCommand}" CommandParameter="{Binding ElementName=AddPatientCardXaml}" Height="30" Width="100" Margin="5,5,5,5"></Button>
+                <Button Content="Редактировать" Command="{Binding EditVisitCommand}" CommandParameter="{Binding ElementName=AddPatientCardXaml}"
+                        IsEnabled="{Binding HasRecords}" Height="30" Width="100" Margin="5,5,5,5"></Button>
+                <Button Content="Удалить" Command="{Binding DeleteVisitCommand}" CommandParameter="{Binding ElementName=AddPatientCardXaml}"
+                        IsEnabled="{Binding HasRecords}" Height="30" Width="100" Margin="5,5,5,5"></Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

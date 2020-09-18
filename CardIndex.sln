@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardIndexDal", "CardIndexDdl\CardIndexDal.csproj", "{5B202923-EF3D-4D5D-A7C0-0D5CA6D3BFFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardIndex", "CardIndex\CardIndex.csproj", "{A1FA2243-6E44-4877-858B-631F300B31F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B202923-EF3D-4D5D-A7C0-0D5CA6D3BFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B202923-EF3D-4D5D-A7C0-0D5CA6D3BFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B202923-EF3D-4D5D-A7C0-0D5CA6D3BFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B202923-EF3D-4D5D-A7C0-0D5CA6D3BFFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1FA2243-6E44-4877-858B-631F300B31F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1FA2243-6E44-4877-858B-631F300B31F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1FA2243-6E44-4877-858B-631F300B31F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1FA2243-6E44-4877-858B-631F300B31F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {320AFE93-7FB0-47F4-8036-BD68FBB4DA67}
+	EndGlobalSection
+EndGlobal

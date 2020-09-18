@@ -1,0 +1,88 @@
+﻿<Window x:Class="CardIndex.View.AddPatientCardView"
+        Name="AddPatientCardXaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:CardIndex.ViewModel"
+        mc:Ignorable="d"
+        xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Title="Добавление карты пациента" Height="450" Width="300"
+        MaxHeight="450" MaxWidth="300"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:converters="clr-namespace:CardIndex.Converters"
+        xmlns:model="clr-namespace:CardIndex.Model"
+        d:DataContext="{d:DesignInstance viewModel:AddPatientCardViewModel}" WindowStyle="ToolWindow"
+        WindowStartupLocation="CenterScreen" Background="Azure">
+    <Window.Resources>
+        <converters:StringToPhoneConverter x:Key="StringToPhoneConverter" />
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <command:EventToCommand Command="{Binding ClosePatientCardCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+           <RowDefinition></RowDefinition>
+           <RowDefinition></RowDefinition>
+           <RowDefinition></RowDefinition>
+           <RowDefinition></RowDefinition>
+           <RowDefinition></RowDefinition>
+           <RowDefinition></RowDefinition>
+           <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel  Grid.Row="0" Orientation="Vertical">
+            <Label Height="30" Width="200" Content="Ф.И.О."></Label>
+            <TextBox Height="20" Width="200" Style="{StaticResource TextErrorStyle}">
+                <TextBox.Text>
+                    <Binding Path="PatientCard.Fio" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule></ExceptionValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel  Grid.Row="1" Orientation="Vertical">
+            <Label Height="30" Width="200" Content="Пол:"></Label>
+            <ComboBox ItemsSource="{Binding Path=PatientCard.Gender, Converter={converters:EnumToComboBoxConverter}, Mode=OneTime}"
+                      SelectedItem="{Binding PatientCard.Gender}" Height="20" Width="200"/>
+        </StackPanel>
+
+        <StackPanel  Grid.Row="2" Orientation="Vertical">
+            <Label Height="30" Width="200" Content="Адрес:"></Label>
+            <TextBox Height="20" Width="200">
+                <TextBox.Text>
+                    <Binding Path="PatientCard.Address">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel  Grid.Row="3" Orientation="Vertical">
+            <Label Height="30" Width="200" Content="Телефон:"></Label>
+            <TextBox PreviewTextInput="UIElement_OnPreviewTextInput" Text="{Binding PatientCard.Phone, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToPhoneConverter}}" Height="20" Width="200"></TextBox>
+
+        </StackPanel>
+
+        <StackPanel  Grid.Row="4" Orientation="Vertical">
+            <Label Height="30" Width="200" Content="Дата рождения:"></Label>
+            <xctk:DateTimePicker Value="{Binding PatientCard.DateOfBirth}"
+                                 Format="Custom"
+                                 FormatString="dd-MMM-yy hh:mm:ss tt"
+                                 TimeFormat="Custom"
+                                 TimeFormatString="hh:mm:ss" Text="{Binding PatientCard.DateOfBirth}" Height="20" Width="200"></xctk:DateTimePicker>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Сохранить" Command="{Binding CloseAndSaveCommand}" CommandParameter="{Binding ElementName=AddPatientCardXaml}" Height="30" Width="100" Margin="5,5,5,5"></Button>
+            <Button Content="Отмена" Command="{Binding CloseWithoutSaveCommand}" CommandParameter="{Binding ElementName=AddPatientCardXaml}" Height="30" Width="100" Margin="5,5,5,5"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
